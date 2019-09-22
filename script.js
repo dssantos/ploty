@@ -30,8 +30,8 @@ document.getElementById("defaultOpen").click();
 
 // Slider
 
-//Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv', function (err, data) {
-Plotly.d3.csv('dados.csv', function (err, data) {
+Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv', function (err, data) {
+//Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados.csv', function (err, data) {
   // Create a lookup table to sort and regroup the columns of data,
   // first by year, then by continent:
   var lookup = {};
@@ -121,8 +121,8 @@ Plotly.d3.csv('dados.csv', function (err, data) {
       label: years[i],
       args: [[years[i]], {
         mode: 'immediate',
-        transition: {duration: 300},
-        frame: {duration: 300, redraw: false},
+        transition: {duration: 500},
+        frame: {duration: 500, redraw: false},
       }]
     });
   }
@@ -130,7 +130,8 @@ Plotly.d3.csv('dados.csv', function (err, data) {
   var layout = {
     xaxis: {
       title: 'Life Expectancy',
-      range: [30, 85]
+      // range: [30, 85]
+      range: [0, 90]
     },
     yaxis: {
       title: 'GDP per Capita',
