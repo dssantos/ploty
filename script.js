@@ -225,7 +225,8 @@ layout = {
 Plotly.plot("Radar", data, layout)
 
 // Splom
-Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv', function(err, rows){
+//Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv', function(err, rows){
+Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados_splom.csv', function(err, rows){
 
     function unpack(rows, key) {
         return rows.map(function(row) { return row[key.replace('.',' ')]; });
@@ -233,11 +234,11 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-dat
 
     colors = []
     for (i=0; i < unpack(rows, 'class').length; i++) {
-      if (unpack(rows, 'class')[i] == "Iris-setosa") {
+      if (unpack(rows, 'class')[i] == "a") {
         colors.push(0)
-      } else if (unpack(rows, 'class')[i] == "Iris-versicolor") {
+      } else if (unpack(rows, 'class')[i] == "b") {
         colors.push(0.5)
-      } else if (unpack(rows, 'class')[i] == "Iris-virginica") {
+      } else if (unpack(rows, 'class')[i] == "c") {
         colors.push(1)
       }
     }
