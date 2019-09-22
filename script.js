@@ -233,12 +233,12 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados_spl
     }
 
     colors = []
-    for (i=0; i < unpack(rows, 'class').length; i++) {
-      if (unpack(rows, 'class')[i] == "a") {
+    for (i=0; i < unpack(rows, 'municipio').length; i++) {
+      if (unpack(rows, 'municipio')[i] == "a") {
         colors.push(0)
-      } else if (unpack(rows, 'class')[i] == "b") {
+      } else if (unpack(rows, 'municipio')[i] == "b") {
         colors.push(0.5)
-      } else if (unpack(rows, 'class')[i] == "c") {
+      } else if (unpack(rows, 'municipio')[i] == "c") {
         colors.push(1)
       }
     }
@@ -262,12 +262,12 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados_spl
     var data = [{
       type: 'splom',
       dimensions: [
-        {label:'sepal length', values:unpack(rows,'sepal length')},
-        {label:'sepal width', values:unpack(rows,'sepal width')},
-        {label:'petal length', values:unpack(rows,'petal length')},
-        {label:'petal width', values:unpack(rows,'petal width')}
+        {label:'atr1', values:unpack(rows,'atr1')},
+        {label:'atr2', values:unpack(rows,'atr2')},
+        {label:'atr3', values:unpack(rows,'atr3')},
+        {label:'atr4', values:unpack(rows,'atr4')}
       ],
-      text: unpack(rows, 'class'),
+      text: unpack(rows, 'municipio'),
       marker: {
         color: colors,
         colorscale:pl_colorscale,
@@ -280,7 +280,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados_spl
     }]
 
     var layout = {
-      title:'Iris Data set',
+      title:'Correlações',
       height: 800,
       width: 800,
       autosize: false,
