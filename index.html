@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Plotly</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	
+	<!-- Tab links -->
+	<div class="tab">
+	  <button class="tablinks" onclick="openChart(event, 'Slider')" id="defaultOpen">Slider</button>
+	  <button class="tablinks" onclick="openChart(event, 'Radar')">Radar</button>
+	  <button class="tablinks" onclick="openChart(event, 'Splom')">Splom</button>
+	</div>
+	<!-- Tab content -->
+	<div id="Slider" class="tabcontent">
+	</div>
+
+	<div id="Radar" class="tabcontent">
+	</div>
+
+	<div id="Splom" class="tabcontent">
+	</div>
+	<div id="description"></div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
