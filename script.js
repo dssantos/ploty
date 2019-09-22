@@ -232,13 +232,24 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados_spl
         return rows.map(function(row) { return row[key.replace('.',' ')]; });
     }
 
+    // colors = []
+    // for (i=0; i < unpack(rows, 'municipio').length; i++) {
+    //   if (unpack(rows, 'municipio')[i] == "a") {
+    //     colors.push(0)
+    //   } else if (unpack(rows, 'municipio')[i] == "b") {
+    //     colors.push(0.5)
+    //   } else if (unpack(rows, 'municipio')[i] == "c") {
+    //     colors.push(1)
+    //   }
+    // }
+
     colors = []
-    for (i=0; i < unpack(rows, 'municipio').length; i++) {
-      if (unpack(rows, 'municipio')[i] == "a") {
+    for (i=0; i < unpack(rows, 'regiao').length; i++) {
+      if (unpack(rows, 'regiao')[i] == "a") {
         colors.push(0)
-      } else if (unpack(rows, 'municipio')[i] == "b") {
+      } else if (unpack(rows, 'regiao')[i] == "b") {
         colors.push(0.5)
-      } else if (unpack(rows, 'municipio')[i] == "c") {
+      } else if (unpack(rows, 'regiao')[i] == "c") {
         colors.push(1)
       }
     }
