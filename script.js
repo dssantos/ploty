@@ -30,8 +30,8 @@ document.getElementById("defaultOpen").click();
 
 // Slider
 
-Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv', function (err, data) {
-//Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados.csv', function (err, data) {
+//Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv', function (err, data) {
+Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/dados.csv', function (err, data) {
   // Create a lookup table to sort and regroup the columns of data,
   // first by year, then by continent:
   var lookup = {};
@@ -91,7 +91,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminde
       marker: {
         size: data.marker.size.slice(),
         sizemode: 'area',
-        sizeref: 200000
+        sizeref: 30200000
       }
     });
   }
