@@ -244,10 +244,10 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
     // }
 
     colors = []
-    for (i=0; i < unpack(rows, 'QtMédicosSUS').length; i++) {
-      if (unpack(rows, 'QtMédicosSUS')[i] < 300) {
+    for (i=0; i < unpack(rows, 'QtProfissionais').length; i++) {
+      if (unpack(rows, 'QtProfissionais')[i] < 100) {
         colors.push(0)
-      } else if (unpack(rows, 'QtMédicosSUS')[i] < 600) {
+      } else if (unpack(rows, 'QtProfissionais')[i] < 500) {
         colors.push(0.5)
       } else {
         colors.push(1)
@@ -273,10 +273,10 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
     var data = [{
       type: 'splom',
       dimensions: [
-        {label:'atr1', values:unpack(rows,'QtMédicosSUS')},
-        {label:'atr2', values:unpack(rows,'QtMédicosNãoSUS')},
-        {label:'atr3', values:unpack(rows,'QtEnfermeirosSUS')},
-        {label:'atr4', values:unpack(rows,'QtEnfermeirosNãoSUS')}
+        {label:'QtMédicosSUS', values:unpack(rows,'QtMédicosSUS')},
+        {label:'QtMédicosNãoSUS', values:unpack(rows,'QtMédicosNãoSUS')},
+        {label:'QtEnfermeirosSUS', values:unpack(rows,'QtEnfermeirosSUS')},
+        {label:'QtEnfermeirosNãoSUS', values:unpack(rows,'QtEnfermeirosNãoSUS')}
       ],
       text: unpack(rows, 'Município'),
       marker: {
