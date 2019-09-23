@@ -226,7 +226,7 @@ Plotly.plot("Radar", data, layout)
 
 // Splom
 //Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv', function(err, rows){
-Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018.csv', function(err, rows){
+Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018_sem_ssa.csv', function(err, rows){
 
     function unpack(rows, key) {
         return rows.map(function(row) { return row[key.replace('.',' ')]; });
@@ -273,10 +273,14 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
     var data = [{
       type: 'splom',
       dimensions: [
-        {label:'Médicos SUS', values:unpack(rows,'QtMédicosSUS')},
-        {label:'Médicos Não SUS', values:unpack(rows,'QtMédicosNãoSUS')},
-        {label:'Enfermeiros SUS', values:unpack(rows,'QtEnfermeirosSUS')},
-        {label:'Enfermeiros Não SUS', values:unpack(rows,'QtEnfermeirosNãoSUS')}
+        // {label:'Médicos SUS', values:unpack(rows,'QtMédicosSUS')},
+        // {label:'Médicos Não SUS', values:unpack(rows,'QtMédicosNãoSUS')},
+        // {label:'Enfermeiros SUS', values:unpack(rows,'QtEnfermeirosSUS')},
+        // {label:'Enfermeiros Não SUS', values:unpack(rows,'QtEnfermeirosNãoSUS')}
+        {label:'Médicos', values:unpack(rows,'QtMédicos')},
+        {label:'Enfermeiros', values:unpack(rows,'QtEnfermeiros')},
+        {label:'Profissionais SUS', values:unpack(rows,'QtSUS')},
+        {label:'Profissionais Não SUS', values:unpack(rows,'QtNãoSUS')}
       ],
       text: unpack(rows, 'Município'),
       marker: {
