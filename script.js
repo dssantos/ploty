@@ -226,7 +226,7 @@ Plotly.plot("Radar", data, layout)
 
 // Splom
 //Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv', function(err, rows){
-Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018.csv', function(err, rows){
+Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018_sem_ssa.csv', function(err, rows){
 
     function unpack(rows, key) {
         return rows.map(function(row) { return row[key.replace('.',' ')]; });
@@ -245,9 +245,9 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
 
     colors = []
     for (i=0; i < unpack(rows, 'QtProfissionais/100000Hab').length; i++) {
-      if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 100) {
+      if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 150) {
         colors.push(0)
-      } else if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 150) {
+      } else if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 250) {
         colors.push(0.5)
       } else {
         colors.push(1)
