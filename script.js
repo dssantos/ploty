@@ -226,7 +226,7 @@ Plotly.plot("Radar", data, layout)
 
 // Splom
 //Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv', function(err, rows){
-Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018_sem_ssa.csv', function(err, rows){
+Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018.csv', function(err, rows){
 
     function unpack(rows, key) {
         return rows.map(function(row) { return row[key.replace('.',' ')]; });
@@ -244,10 +244,10 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
     // }
 
     colors = []
-    for (i=0; i < unpack(rows, 'População').length; i++) {
-      if (unpack(rows, 'População')[i] < 100000) {
+    for (i=0; i < unpack(rows, 'QtProfissionais/100000Hab').length; i++) {
+      if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 100) {
         colors.push(0)
-      } else if (unpack(rows, 'População')[i] < 200000) {
+      } else if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 150) {
         colors.push(0.5)
       } else {
         colors.push(1)
@@ -277,10 +277,11 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
         // {label:'Médicos Não SUS', values:unpack(rows,'QtMédicosNãoSUS')},
         // {label:'Enfermeiros SUS', values:unpack(rows,'QtEnfermeirosSUS')},
         // {label:'Enfermeiros Não SUS', values:unpack(rows,'QtEnfermeirosNãoSUS')}
-        {label:'Médicos', values:unpack(rows,'QtMédicos')},
-        {label:'Enfermeiros', values:unpack(rows,'QtEnfermeiros')},
-        {label:'Profissionais SUS', values:unpack(rows,'QtSUS')},
-        {label:'Profissionais Não SUS', values:unpack(rows,'QtNãoSUS')}
+        {label:'Médicos', values:unpack(rows,'QtMédicos/100000Hab')},
+        {label:'Enfermeiros', values:unpack(rows,'QtEnfermeiros/100000Hab')},
+        {label:'Profissionais SUS', values:unpack(rows,'QtSUS/100000Hab')},
+        {label:'Profissionais Não SUS', values:unpack(rows,'QtNãoSUS/100000Hab')},
+        {label:'Profissionais', values:unpack(rows,'QtProfissionais/100000Hab')}
       ],
       text: unpack(rows, 'Município'),
       marker: {
@@ -309,7 +310,9 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
       xaxis4:axis(),
       yaxis2:axis(),
       yaxis3:axis(),
-      yaxis4:axis()
+      yaxis4:axis(),
+      yaxis5:axis(),
+      yaxis5:axis()
     }
 
     Plotly.react('Splom', data, layout)
