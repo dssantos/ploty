@@ -244,10 +244,10 @@ Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2
     // }
 
     colors = []
-    for (i=0; i < unpack(rows, 'QtProfissionais').length; i++) {
-      if (unpack(rows, 'QtProfissionais')[i] < 200) {
+    for (i=0; i < unpack(rows, 'População').length; i++) {
+      if (unpack(rows, 'População')[i] < 100000) {
         colors.push(0)
-      } else if (unpack(rows, 'QtProfissionais')[i] < 500) {
+      } else if (unpack(rows, 'População')[i] < 200000) {
         colors.push(0.5)
       } else {
         colors.push(1)
