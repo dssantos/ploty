@@ -28,6 +28,89 @@ function openChart(evt, chartName) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
+
+
+// Splom
+Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018.csv', function(err, rows){
+
+    function unpack(rows, key) {
+        return rows.map(function(row) { return row[key.replace('.',' ')]; });
+    }
+
+    column_values = unpack(rows, 'QtProfissionais/100000Hab')
+    colors = []
+    for (i=0; i < column_values.length; i++) {
+      colors.push(column_values[i]/column_values.length) // Calcula o percentil
+    }
+
+    // Os pontos são coloridos de acordo com o valor do percentil
+    var pl_colorscale=[
+               [0.0, '#ff9999'], // Vermelho
+               [0.25, '#ff9999'],
+               // Quartil 1
+               [0.25, '#ffcc00'], // Amarelo
+               [0.50, '#ffcc00'],
+               // Quartil 2
+               [0.50, '#66ff66'], // Verde claro
+               [0.75, '#66ff66'],
+               // Quartil 3
+               [0.75, '#009900'], // Verde escuro
+               [1, '#009900']
+    ]
+
+    var axis = () => ({
+      showline:false,
+      zeroline:true,
+      gridcolor:'#ffff',
+      ticklen:4
+    })
+
+    var data = [{
+      type: 'splom',
+      dimensions: [
+        {label:'Médicos', values:unpack(rows,'QtMédicos/100000Hab')},
+        {label:'Enfermeiros', values:unpack(rows,'QtEnfermeiros/100000Hab')},
+        {label:'SUS', values:unpack(rows,'QtSUS/100000Hab')},
+        {label:'Não SUS', values:unpack(rows,'QtNãoSUS/100000Hab')},
+        {label:'Profissionais', values:unpack(rows,'QtProfissionais/100000Hab')}
+      ],
+      text: unpack(rows, 'Município'),
+      marker: {
+        color: colors,
+        colorscale:pl_colorscale,
+        size: 7,
+        line: {
+          color: 'white',
+          width: 0.5
+        }
+      }
+    }]
+
+    var layout = {
+      title:'Correlações',
+      height: 800,
+      width: 800,
+      autosize: false,
+      hovermode:'closest',
+      dragmode:'select',
+      plot_bgcolor:'rgba(240,240,240, 0.95)',
+      xaxis:axis(),
+      yaxis:axis(),
+      xaxis2:axis(),
+      xaxis3:axis(),
+      xaxis4:axis(),
+      yaxis2:axis(),
+      yaxis3:axis(),
+      yaxis4:axis(),
+      yaxis5:axis(),
+      yaxis5:axis()
+    }
+
+    Plotly.react('Splom', data, layout)
+
+});
+
+
 // Slider
 
 //Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv', function (err, data) {
@@ -224,97 +307,3 @@ layout = {
 
 Plotly.plot("Radar", data, layout)
 
-// Splom
-//Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv', function(err, rows){
-Plotly.d3.csv('https://raw.githubusercontent.com/dssantos/ploty/master/medicos_2018_sem_ssa.csv', function(err, rows){
-
-    function unpack(rows, key) {
-        return rows.map(function(row) { return row[key.replace('.',' ')]; });
-    }
-
-    // colors = []
-    // for (i=0; i < unpack(rows, 'regiao').length; i++) {
-    //   if (unpack(rows, 'regiao')[i] == "a") {
-    //     colors.push(0)
-    //   } else if (unpack(rows, 'regiao')[i] == "b") {
-    //     colors.push(0.5)
-    //   } else if (unpack(rows, 'regiao')[i] == "c") {
-    //     colors.push(1)
-    //   }
-    // }
-
-    colors = []
-    for (i=0; i < unpack(rows, 'QtProfissionais/100000Hab').length; i++) {
-      if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 150) {
-        colors.push(0)
-      } else if (unpack(rows, 'QtProfissionais/100000Hab')[i] < 250) {
-        colors.push(0.5)
-      } else {
-        colors.push(1)
-      }
-    }
-
-    var pl_colorscale=[
-               [0.0, '#19d3f3'],
-               [0.333, '#19d3f3'],
-               [0.333, '#e763fa'],
-               [0.666, '#e763fa'],
-               [0.666, '#636efa'],
-               [1, '#636efa']
-    ]
-
-    var axis = () => ({
-      showline:false,
-      zeroline:false,
-      gridcolor:'#ffff',
-      ticklen:4
-    })
-
-    var data = [{
-      type: 'splom',
-      dimensions: [
-        // {label:'Médicos SUS', values:unpack(rows,'QtMédicosSUS')},
-        // {label:'Médicos Não SUS', values:unpack(rows,'QtMédicosNãoSUS')},
-        // {label:'Enfermeiros SUS', values:unpack(rows,'QtEnfermeirosSUS')},
-        // {label:'Enfermeiros Não SUS', values:unpack(rows,'QtEnfermeirosNãoSUS')}
-        {label:'Médicos', values:unpack(rows,'QtMédicos/100000Hab')},
-        {label:'Enfermeiros', values:unpack(rows,'QtEnfermeiros/100000Hab')},
-        {label:'Profissionais SUS', values:unpack(rows,'QtSUS/100000Hab')},
-        {label:'Profissionais Não SUS', values:unpack(rows,'QtNãoSUS/100000Hab')},
-        {label:'Profissionais', values:unpack(rows,'QtProfissionais/100000Hab')}
-      ],
-      text: unpack(rows, 'Município'),
-      marker: {
-        color: colors,
-        colorscale:pl_colorscale,
-        size: 7,
-        line: {
-          color: 'white',
-          width: 0.5
-        }
-      }
-    }]
-
-    var layout = {
-      title:'Correlações',
-      height: 800,
-      width: 800,
-      autosize: false,
-      hovermode:'closest',
-      dragmode:'select',
-      plot_bgcolor:'rgba(240,240,240, 0.95)',
-      xaxis:axis(),
-      yaxis:axis(),
-      xaxis2:axis(),
-      xaxis3:axis(),
-      xaxis4:axis(),
-      yaxis2:axis(),
-      yaxis3:axis(),
-      yaxis4:axis(),
-      yaxis5:axis(),
-      yaxis5:axis()
-    }
-
-    Plotly.react('Splom', data, layout)
-
-});
